@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MathMoreThanMagic</title>
+<meta name="description" content="Scoprire la logica dietro le meraviglie — giochi di matematica per la scuola superiore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:   #0b1230;
+    --navy-panel:  #121b45;
+    --navy-line:   #2a3572;
+    --gold:        #cfa445;
+    --gold-bright: #e8c874;
+    --silver:      #b9c0d6;
+    --paper:       #f4efe2;
+    --paper-dim:   #d9d3c1;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(207,164,69,0.10), transparent 45%),
+      radial-gradient(ellipse at 85% 110%, rgba(207,164,69,0.08), transparent 40%),
+      var(--navy-deep);
+    color:var(--paper);
+    font-family:'Jost', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 20px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* Faint drifting math symbols */
+  .symbols{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+  .symbols span{
+    position:absolute;
+    font-family:'Cormorant Garamond', serif;
+    color:var(--gold);
+    opacity:0.08;
+    animation:drift linear infinite;
+    user-select:none;
+  }
+  @keyframes drift{
+    from{ transform:translateY(0) rotate(0deg); }
+    to{ transform:translateY(-40px) rotate(8deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .symbols span{ animation:none; }
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:420px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .mark{
+    width:86px;
+    height:86px;
+    border-radius:50%;
+    border:1px solid var(--navy-line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:34px;
+    color:var(--gold-bright);
+    background:linear-gradient(160deg, var(--navy-panel), var(--navy-deep));
+    box-shadow:0 0 0 1px rgba(207,164,69,0.15), 0 12px 30px rgba(0,0,0,0.35);
+    margin-bottom:28px;
+    letter-spacing:1px;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(30px, 6vw, 40px);
+    letter-spacing:0.5px;
+    margin:0 0 6px;
+    text-align:center;
+    color:var(--paper);
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+  }
+
+  .tagline{
+    font-size:13px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--silver);
+    text-align:center;
+    margin:0 0 44px;
+    font-weight:300;
+  }
+
+  /* Links styled like a perforated card ticket — nods to the product */
+  .cards{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .card{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    width:100%;
+    padding:18px 22px;
+    background:var(--navy-panel);
+    border:1px solid var(--navy-line);
+    border-radius:2px;
+    color:var(--paper);
+    text-decoration:none;
+    font-family:'Jost', sans-serif;
+    transition:border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .card::before,
+  .card::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--navy-deep);
+    border:1px solid var(--navy-line);
+  }
+  .card::before{ left:-7px; }
+  .card::after{ right:-7px; }
+
+  .card:hover, .card:focus-visible{
+    border-color:var(--gold);
+    background:#152056;
+    transform:translateY(-2px);
+    outline:none;
+  }
+
+  .card .glyph{
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    color:var(--gold);
+    border:1px solid var(--navy-line);
+    border-radius:50%;
+  }
+
+  .card .label{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .card .label .title{
+    font-size:16px;
+    letter-spacing:0.3px;
+  }
+  .card .label .sub{
+    font-size:12px;
+    color:var(--silver);
+    font-weight:300;
+  }
+
+  .card .arrow{
+    flex:0 0 auto;
+    color:var(--gold);
+    font-size:16px;
+    transition:transform .25s ease;
+  }
+  .card:hover .arrow{ transform:translateX(4px); }
+
+  footer{
+    margin-top:48px;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:var(--navy-line);
+    text-transform:uppercase;
+  }
+  footer span{ color:var(--gold); }
+
+  @media (max-width:380px){
+    .mark{ width:74px; height:74px; font-size:28px; }
+    .card{ padding:16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="symbols" aria-hidden="true"></div>
+
+<div class="wrap">
+  <div class="mark">M³</div>
+
+  <h1>Math<em>More</em>ThanMagic</h1>
+  <p class="tagline">Scoprire la logica dietro le meraviglie</p>
+
+  <div class="cards">
+    <a class="card" href="https://www.facebook.com/profile.php?id=61591870391862" target="_blank" rel="noopener">
+      <span class="glyph">f</span>
+      <span class="label">
+        <span class="title">Seguici su Facebook</span>
+        <span class="sub">novità, anteprime, community</span>
+      </span>
+      <span class="arrow">&#8594;</span>
+    </a>
+
+    <a class="card" href="https://www.teacherspayteachers.com/store/mathmorethanmagic" target="_blank" rel="noopener">
+      <span class="glyph">&pi;</span>
+      <span class="label">
+        <span class="title">Materiali su TPT</span>
+        <span class="sub">risorse scaricabili per la classe</span>
+      </span>
+      <span class="arrow">&#8594;</span>
+    </a>
+
+    <a class="card" href="mailto:mathmorethanmagic@gmail.com">
+      <span class="glyph">&#9993;</span>
+      <span class="label">
+        <span class="title">Scrivici</span>
+        <span class="sub">mathmorethanmagic@gmail.com</span>
+      </span>
+      <span class="arrow">&#8594;</span>
+    </a>
+  </div>
+
+  <footer>&copy; 2026 <span>MathMoreThanMagic</span></footer>
+</div>
+
+<script>
+  // Scatter faint math symbols across the background, animate drift.
+  const glyphs = ['&pi;','&sum;','&radic;','&times;','&infin;','&int;','&Delta;','&fnof;'];
+  const layer = document.querySelector('.symbols');
+  const count = window.innerWidth < 500 ? 10 : 18;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.innerHTML = glyphs[Math.floor(Math.random() * glyphs.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = Math.random() * 100 + 'vh';
+    el.style.fontSize = (18 + Math.random() * 40) + 'px';
+    el.style.animationDuration = (14 + Math.random() * 18) + 's';
+    el.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+    layer.appendChild(el);
+  }
+</script>
+
+</body>
+</html>
