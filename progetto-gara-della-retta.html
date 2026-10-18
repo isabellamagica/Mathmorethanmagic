@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gara della retta — MathMoreThanMagic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:   #0b1230;
+    --navy-panel:  #121b45;
+    --navy-line:   #2a3572;
+    --gold-bright: #f0cf7a;
+    --silver:      #b9c0d6;
+    --paper:       #f4efe2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background-image:url('immagini/sfondo.jpg');
+    background-size:cover;
+    background-position:top center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-color:var(--navy-deep);
+    color:var(--paper);
+    font-family:'Jost', sans-serif;
+    padding:6vh 20px;
+  }
+  .wrap{ max-width:760px; margin:0 auto; }
+  .logo-img{
+    width:100%; max-width:340px; height:auto; display:block; margin:0 auto 6px;
+  }
+  .back-link{
+    display:block; text-align:center; color:var(--gold-bright);
+    font-size:13px; text-decoration:none; margin:10px 0 28px; letter-spacing:0.5px;
+  }
+  .back-link:hover{ text-decoration:underline; }
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(24px, 6vw, 32px);
+    text-align:center;
+    color:var(--gold-bright);
+    margin:0 0 20px;
+  }
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .gal-img{
+    width:100%;
+    border:1px solid var(--navy-line);
+    border-radius:10px;
+    overflow:hidden;
+    background:rgba(0,0,0,0.2);
+  }
+  .gal-img img{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+  .desc{
+    font-size:15px;
+    line-height:1.7;
+    color:var(--silver);
+    font-weight:300;
+    text-align:left;
+  }
+  .play-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin:26px 0 8px;
+  }
+  .play-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 22px;
+    border-radius:50px;
+    background:
+      radial-gradient(circle at 32% 28%, #fff6d8 0%, #f0cf7a 22%, #d9ab3f 55%, #a9781f 85%);
+    color:#4a2f06;
+    font-family:'Jost', sans-serif;
+    font-weight:500;
+    font-size:15px;
+    text-decoration:none;
+    box-shadow:
+      inset 0 2px 3px rgba(255,255,255,0.85),
+      inset 0 -4px 6px rgba(120,80,10,0.45),
+      0 4px 10px rgba(0,0,0,0.4);
+    transition:transform .2s ease;
+  }
+  .play-btn:hover{ transform:translateY(-2px); }
+  .play-btn .flag{ font-size:16px; }
+
+  .rules{
+    margin-top:26px;
+  }
+  .rules h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:20px;
+    color:var(--gold-bright);
+    margin:0 0 10px;
+  }
+  .rules h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--gold-bright);
+    margin:20px 0 8px;
+  }
+  .rules p{
+    font-size:14px;
+    line-height:1.7;
+    color:var(--silver);
+    font-weight:300;
+    margin:0 0 12px;
+  }
+  footer{
+    margin-top:48px; text-align:center; font-size:11px; letter-spacing:1.5px;
+    color:var(--navy-line); text-transform:uppercase;
+  }
+  footer span{ color:var(--gold-bright); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="logo-img" src="immagini/logo.png" alt="MathMoreThanMagic.com">
+  <a class="back-link" href="progetti.html">&larr; Torna a Gallery</a>
+  <h1>Gara della retta</h1>
+
+  <div class="gallery">
+      <div class="gal-img"><img src="immagini/gara-della-retta.jpg" alt="Gara della retta"></div>
+      <div class="gal-img"><img src="immagini/gara-della-retta-2.jpg" alt="Gara della retta"></div>
+  </div>
+
+  <p class="desc">Gioco a squadre da fare alla LIM sulla retta: sessanta domande in tre manche su coefficiente angolare e termine noto, rette crescenti e decrescenti, orizzontali e verticali, parallele, forma implicita ed esplicita.</p>
+
+  <div class="rules">
+    <h2>Come si gioca alla LIM</h2>
+    <p>La classe si divide in squadre. La squadra di turno sceglie una casella del tabellone: più punti vale, più la domanda è difficile.</p>
+    <p>La squadra ha 30 secondi (il timer si può disattivare) per toccare la risposta giusta sulla LIM.</p>
+    <p>Se sbaglia, un'altra squadra può alzare la mano e rubare la domanda. Si può scegliere se chi sbaglia perde punti.</p>
+    <p>Dopo ogni domanda il grafico spiega la risposta. Vince chi ha più punti quando il tabellone è vuoto.</p>
+    <p>Consiglio: all'inizio della partita premete "Schermo intero" per vedere tutto in grande sulla lavagna.</p>
+  </div>
+
+  <div class="play-buttons">
+    <a class="play-btn" href="gara-della-retta.html" target="_blank" rel="noopener">
+      <span class="flag">🇮🇹</span> Gioca ora
+    </a>
+  </div>
+
+  <footer>Math<span>more</span>than<span>magic</span></footer>
+</div>
+</body>
+</html>
